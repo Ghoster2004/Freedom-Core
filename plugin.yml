@@ -1,0 +1,42 @@
+name: FreedomCore
+version: 0.1
+description: The core plugin for any free op server!
+author: TheCorbis
+main: com.corbis.fredomcore.Main
+depend: [GroupManager]
+commands:
+    admin:
+        description: Gives someone permission to use admin commands!
+    kick:
+        description: Kicks someone from the server!
+    ban:
+        description: Bans a player from the server!
+    nick:
+        description: Adds a nickname to your name in chat!
+    opall:
+        description: Ops all players!
+    fly:
+        description: Toggles a player's flight!
+    gamemode:
+        description: Changes a players gamemode!
+    gm:
+        description: Changes a players gamemode!
+    gms:
+        description: Changes your gamemode to survival!
+    gmc:
+        description: Changes your gamemode to creative!
+    gma:
+        description: Changes your gamemode to adventure!
+    gmsp:
+        description: Changes your gamemode to spectator!
+    rl:
+        description: Reloads the server!
+    freeze:
+        description: Freezes a player!
+permissions:
+    freedom.admin:
+        description: Gives a player permission to use admin commands!
+        default: false
+    freedom.superadmin:
+        description: Gives a player permission to use superadmin commands!
+        default: false
