@@ -7,6 +7,8 @@ depend: [GroupManager]
 commands:
     admin:
         description: Gives someone permission to use admin commands!
+    superadmin:
+        description: Gives someone permission to use superadmin commands!
     kick:
         description: Kicks someone from the server!
     ban:

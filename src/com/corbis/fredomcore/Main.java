@@ -23,6 +23,7 @@ import com.corbis.freedomcore.moderation.BanCommand;
 import com.corbis.freedomcore.moderation.KickCommand;
 import com.corbis.freedomcore.moderation.ReloadDisabler;
 import com.corbis.freedomcore.moderation.RlCommand;
+import com.corbis.freedomcore.moderation.SuperAdminCommand;
 import com.corbis.freedomcore.player.FlyCommand;
 import com.corbis.freedomcore.player.GamemodeCommand;
 import com.corbis.freedomcore.player.GmCommand;
@@ -59,6 +60,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor{
 		this.getCommand("nick").setExecutor(new NickCommand());
 		this.getCommand("kick").setExecutor(new KickCommand());
 		this.getCommand("admin").setExecutor(new AdminCommand());
+		this.getCommand("superadmin").setExecutor(new SuperAdminCommand());
 		this.getCommand("ban").setExecutor(new BanCommand());
 		this.getCommand("fly").setExecutor(new FlyCommand());
 		this.getCommand("gamemode").setExecutor(new GamemodeCommand());
