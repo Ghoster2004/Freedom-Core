@@ -35,6 +35,8 @@ commands:
         description: Reloads the server!
     freeze:
         description: Freezes a player!
+    smite:
+        description: Strikes lightning on a player!
 permissions:
     freedom.admin:
         description: Gives a player permission to use admin commands!

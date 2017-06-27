@@ -16,7 +16,7 @@ public class GmsCommand implements CommandExecutor{
 				Player p = (Player) sender;
 				if(args.length == 0) {
 					p.setGameMode(GameMode.SURVIVAL);
-					p.sendMessage(ChatColor.RED + "[Freedom] You gamemode has been updated!");
+					p.sendMessage(ChatColor.RED + "[Freedom] Your gamemode has been updated!");
 				}else{
 					p.sendMessage(ChatColor.RED + "[Freedom] Correct usage: /gms");
 				}
