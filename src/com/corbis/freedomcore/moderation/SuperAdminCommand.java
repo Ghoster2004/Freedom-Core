@@ -12,22 +12,22 @@ public class SuperAdminCommand implements CommandExecutor {
 	   @Override
 	    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		   if(sender instanceof Player) {
-			   if(cmd.getName().equalsIgnoreCase("admin")) {
+			   if(cmd.getName().equalsIgnoreCase("superadmin")) {
 				   Player p = (Player) sender;
 				   Player t = Bukkit.getPlayer(args[0]);
 				   if(args.length == 1) {
 					   if(p.hasPermission("freedom.superadmin")) {
 						   p.getServer().dispatchCommand(p.getServer().getConsoleSender(), "manuaddp " + t.getName() + " freedom.superadmin");
-						   p.sendMessage(ChatColor.RED + "[Freedom] " + t.getName() + " has been given admin!");
+						   p.sendMessage(ChatColor.RED + "[Freedom] " + t.getName() + " has been given superadmin!");
 					   }else{
 							   p.sendMessage(ChatColor.RED + "[Freedom] No permission!");
 					   }
 				   }else{
-					   p.sendMessage(ChatColor.RED + "[Freedom] Correct usage: /admin (player)");
+					   p.sendMessage(ChatColor.RED + "[Freedom] Correct usage: /superadmin (player)");
 				   }
 			   }
 		   }else{
-			   if(cmd.getName().equalsIgnoreCase("admin")) {
+			   if(cmd.getName().equalsIgnoreCase("superadmin")) {
 				   Player t = Bukkit.getPlayer(args[0]);
 				   t.getServer().dispatchCommand(t.getServer().getConsoleSender(), "manuaddp " + t.getName() + " freedom.superadmin");
 			   }
