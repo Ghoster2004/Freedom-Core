@@ -16,7 +16,10 @@ public class GamemodeCommand implements CommandExecutor{
     		if(cmd.getName().equalsIgnoreCase("gamemode")) {
     			Player p = (Player) sender;
     			Player t = Bukkit.getPlayer(args[1]);
-    			if(args.length == 1) {
+    			if(args.length == 0) {
+    				p.sendMessage(ChatColor.RED + "[Freedom] Correct usage: /gamemode (gamemode) (player)");
+    			}
+    			else if(args.length == 1) {
     				if(args[0].equalsIgnoreCase("creative")) {
     					p.setGameMode(GameMode.CREATIVE);
     					p.sendMessage(ChatColor.RED + "[Freedom] Your gamemode has been updated!");
