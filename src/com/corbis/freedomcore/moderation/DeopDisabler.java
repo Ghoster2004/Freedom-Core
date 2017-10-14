@@ -6,13 +6,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
-public class ReloadDisabler implements Listener{
+public class DeopDisabler implements Listener{
 
 	@EventHandler
 	public void onReload(PlayerCommandPreprocessEvent e) {
 		Player p = e.getPlayer();
 		String label = e.getMessage();
-		if(label.contains("/reload")) {
+		if(label.contains("/deop")) {
 			if(p.hasPermission("freedom.superadmin")) {
 				e.setCancelled(false);
 			}else{

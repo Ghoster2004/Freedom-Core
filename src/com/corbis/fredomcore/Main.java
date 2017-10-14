@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,10 +20,17 @@ import com.corbis.freedomcore.chat.NickCommand;
 import com.corbis.freedomcore.chat.PlayerJoinListener;
 import com.corbis.freedomcore.chat.PlayerLeaveListener;
 import com.corbis.freedomcore.moderation.AdminCommand;
+import com.corbis.freedomcore.moderation.BackupDisabler;
 import com.corbis.freedomcore.moderation.BanCommand;
+import com.corbis.freedomcore.moderation.BigtreeDisabler;
+import com.corbis.freedomcore.moderation.ClearinventoryDisabler;
+import com.corbis.freedomcore.moderation.DeopDisabler;
 import com.corbis.freedomcore.moderation.KickCommand;
+import com.corbis.freedomcore.moderation.KillDisabler;
 import com.corbis.freedomcore.moderation.ReloadDisabler;
+import com.corbis.freedomcore.moderation.RestartDisabler;
 import com.corbis.freedomcore.moderation.RlCommand;
+import com.corbis.freedomcore.moderation.StopDisabler;
 import com.corbis.freedomcore.moderation.SuperAdminCommand;
 import com.corbis.freedomcore.player.FlyCommand;
 import com.corbis.freedomcore.player.GamemodeCommand;
@@ -33,6 +41,7 @@ import com.corbis.freedomcore.player.GmsCommand;
 import com.corbis.freedomcore.player.GmspCommand;
 import com.corbis.freedomcore.player.Protection;
 
+@SuppressWarnings("deprecation")
 public class Main extends JavaPlugin implements Listener, CommandExecutor{
 	ArrayList<Player> frozen = new ArrayList<Player>();
 	
@@ -54,6 +63,13 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor{
 		getServer().getPluginManager().registerEvents(new PlayerLeaveListener(), this);
 		getServer().getPluginManager().registerEvents(new Protection(), this);
 		getServer().getPluginManager().registerEvents(new ReloadDisabler(), this);
+		getServer().getPluginManager().registerEvents(new KillDisabler(), this);
+		getServer().getPluginManager().registerEvents(new RestartDisabler(), this);
+		getServer().getPluginManager().registerEvents(new DeopDisabler(), this);
+		getServer().getPluginManager().registerEvents(new StopDisabler(), this);
+		getServer().getPluginManager().registerEvents(new BackupDisabler(), this);
+		getServer().getPluginManager().registerEvents(new BigtreeDisabler(), this);
+		getServer().getPluginManager().registerEvents(new ClearinventoryDisabler(), this);
 	}
 	
 	public void registerCommands() {
@@ -78,10 +94,8 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor{
 			if(cmd.getName().equalsIgnoreCase("freeze")) {
 				Player p = (Player) sender;
 				Player t = Bukkit.getPlayer(args[0]);
-				if(args.length == 0) {
-					p.sendMessage(ChatColor.RED + "[Freedom] Correct usage: /freeze (player)");
-				}
-				else if(args.length == 1) {
+				if(args.length == 1) {
+					if(Bukkit.getPlayer(t.getName()).isOnline()) {
 					if(p.hasPermission("freedom.admin")) {
 						if(frozen.contains(t)) {
 							frozen.remove(t);
@@ -93,7 +107,8 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor{
 					}else{
 						p.sendMessage(ChatColor.RED + "[Freedom] No permission!");
 					}
-				}else{
+				}
+				}else if(args.length != 1) {
 					p.sendMessage(ChatColor.RED + "[Freedom] Correct usage: /freeze (player)");
 				}
 			}
@@ -106,6 +121,16 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor{
 		if(frozen.contains(e.getPlayer())) {
 		e.setTo(e.getFrom());
 		e.getPlayer().sendMessage(ChatColor.RED + "[Freedom] You are currently frozen and cannot move!");
+		}else{
+			e.setCancelled(false);
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerMove(PlayerChatEvent e) {
+		if(frozen.contains(e.getPlayer())) {
+		e.setCancelled(true);
+		e.getPlayer().sendMessage(ChatColor.RED + "[Freedom] You are currently frozen and cannot talk!");
 		}else{
 			e.setCancelled(false);
 		}

@@ -16,8 +16,8 @@ public class OpAllCommand implements CommandExecutor{
     			Player p = (Player) sender;
     			for (Player players : Bukkit.getOnlinePlayers()) {
     				 players.setOp(true);
+    				 p.sendMessage(ChatColor.RED + "[Freedom] All players have been opped!");
     				}
-    			p.sendMessage(ChatColor.RED + "[Freedom] All players have been opped!");
     		}
     	}
     	return false;
